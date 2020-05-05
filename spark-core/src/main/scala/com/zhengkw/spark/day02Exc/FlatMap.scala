@@ -18,6 +18,6 @@ object FlatMap {
     val list1 = List(30, 50, 70, 60, 10, 20)
     val rdd1: RDD[Int] = sc.parallelize(list1, 2)
     val rdd2 = rdd1.flatMap(x => List(x * x))
-    rdd2.collect().foreach(x => print(x + " "))
+    println(rdd2.collect().mkString("<-", ",", "->"))
   }
 }
