@@ -17,7 +17,20 @@ object MapPartitions {
     val sc = new SparkContext(conf)
     //转换成RDD
     val rdd1 = sc.parallelize(list1)
-    println(rdd1.map(_ * 2))
-    rdd1.collect()
+    val rdd2 = rdd1.map(_ * 2)
+
+    rdd1.collect() //100  20  140   60   120   40
+    //rdd2.collect() //120   60   20   100   40  140
+    /* val rdd2 = rdd1.mapPartitions(it => {
+       it.map(_ * 2)
+     })
+
+     // rdd1.collect()//100   120    140    40    20    60
+     rdd2.collect() //140    120    100    40    20    60
+    */
+    rdd2.foreach(println)
+    sc.stop()
+
   }
+
 }
