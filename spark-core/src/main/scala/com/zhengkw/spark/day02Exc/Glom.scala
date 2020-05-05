@@ -18,6 +18,7 @@ object Glom {
     val list1 = List(30, 50, 70, 60, 10, 20)
     val rdd1: RDD[Int] = sc.parallelize(list1, 3)
     val rdd2 = rdd1.glom()
+      //把每个分区的数据转变成数组，再合并到一个rdd中！
        rdd2.collect().map(_.toList).foreach(println)
   }
 }
