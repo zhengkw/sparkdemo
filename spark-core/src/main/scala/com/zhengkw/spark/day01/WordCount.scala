@@ -1,4 +1,4 @@
-package com.zhengkw.spark
+package com.zhengkw.spark.day01
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
