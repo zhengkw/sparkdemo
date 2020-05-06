@@ -12,7 +12,7 @@ import org.apache.spark.{SparkConf, SparkContext}
  */
 object AggregateDemo {
   def main(args: Array[String]): Unit = {
-    val conf: SparkConf = new SparkConf().setAppName("FoldByKey").setMaster("local[2]")
+   /* val conf: SparkConf = new SparkConf().setAppName("FoldByKey").setMaster("local[2]")
     val sc: SparkContext = new SparkContext(conf)
     val rdd = sc.parallelize(List(("a", 3), ("a", 2), ("c", 4), ("b", 3), ("c", 6), ("c", 8)), 2)
     var max = Int.MinValue
@@ -36,8 +36,8 @@ object AggregateDemo {
         (sumCount1._1 + sumCount2._1, sumCount1._2 + sumCount2._2)
       */
     )
+*/
 
-
-    rdd3.collect().foreach(println)
+//   / rdd3.collect().foreach(println)
   }
 }

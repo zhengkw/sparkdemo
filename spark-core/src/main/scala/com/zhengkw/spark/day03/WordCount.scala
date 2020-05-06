@@ -14,16 +14,25 @@ import scala.io.Source
  */
 object WordCount {
   def main(args: Array[String]): Unit = {
-    var path = "F:\\mrinput\\wordcount"
-    //获取文件流
-    val file = Source.fromFile(path, "utf-8")
-    //获取一行
-    val stringLines = file.getLines()
-    val strings = stringLines.flatMap(x => x.split(" ")).filter(x => x.trim.length > 0)
-    val map = strings.toList.groupBy(x => x).mapValues(_.size)
-    val conf: SparkConf = new SparkConf().setAppName("FoldByKey").setMaster("local[2]")
+    var path = "F:\\mrinput\\wordcount\\test.txt"
+    val conf: SparkConf = new SparkConf().setAppName("wordcount").setMaster("local[2]")
     val sc: SparkContext = new SparkContext(conf)
-    val rdd = sc.parallelize(map.toList, 2)
-    val rdd1 = rdd.groupByKey()
+    val rdd = sc.textFile(path)
+    rdd
+      .flatMap(_.split(" "))
+      .map((_, 1))
+      .reduceByKey(_ + _)
+      .map({
+        case (k, v) => (v, k)
+      })
+      .sortByKey(false)
+      .map({
+        case (v, k) => (k, v)
+      })
+      .collect()
+      .foreach(println)
+    sc.stop()
+
+
   }
 }
