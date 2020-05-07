@@ -18,6 +18,9 @@ object ReduceByKeyDemo2 {
     val rdd = sc.parallelize(list1, 2)
     val rdd2 = rdd.reduceByKey(_.max(_))
     rdd2.collect().foreach(println)
+    //foldBykey
+    val rdd3 = rdd.foldByKey(Int.MinValue)(_.max(_))
+    rdd3.collect().foreach(println)
 
   }
 }
