@@ -32,19 +32,19 @@ object RDDPractice {
         //((splits(1), splits(4), 1))
         ((splits(1), splits(4)), 1)
     })
-      .reduceByKey(_ + _)
+      .reduceByKey(_ + _) //把前2个看成一个key 集合count
       .map({
         case (k, v) => (v, k)
-      }).sortByKey(false)
+      }).sortByKey(false) //通过key排序count所以交换位置！
       .map({
         case (k, v) => (v, k)
       })
       .map({
-        case ((pro, ads), count) => pro -> (ads -> count)
+        case ((pro, ads), count) => pro -> (ads -> count) // 让省作为key
       })
       .groupByKey()
       .map({
-        case (k, v) => (k, v.take(3))
+        case (k, v) => (k, v.take(3)) //取count的前3
       }).sortByKey()
       .collect().foreach(println)
 
