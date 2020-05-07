@@ -17,5 +17,7 @@ object ReduceByKey {
     val list1 = List("hello" -> 1, "hello" -> 2, "world" -> 2, "world" -> 1, "hello" -> 2)
     val rdd1 = sc.parallelize(list1, 2)
     rdd1.reduceByKey(_ + _).collect().foreach(println)
+    //rdd1.reduce()
+   // list1.reduce()
   }
 }
