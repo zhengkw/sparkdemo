@@ -15,6 +15,12 @@ object AggregateDemo {
     val sc = new SparkContext(
       new SparkConf().setMaster("local[2]").setAppName("aggregate"))
     val rdd = sc.parallelize(List(("a", 3), ("a", 2), ("c", 4), ("b", 3), ("c", 6), ("c", 8)), 2)
-    //rdd.aggregateByKey(())
+    //rdd.glom().map(_.toList).collect().foreach(println)
+    //每个分区取最大值，分区外求和
+    val rdd2 = rdd.aggregateByKey(Int.MinValue)(
+      (u, v) => u.max(v),
+      (u, m) => u + m
+    )
+    rdd2.collect().foreach(print)
   }
 }
