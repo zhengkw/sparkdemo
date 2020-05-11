@@ -16,14 +16,16 @@ object CategorySessionTopApp {
   def statCategoryTop10Session(sc: SparkContext,
                                categoryCountList: List[CategroyCount],
                                userVisitActionRDD: RDD[UserVisitAction]) = {
-    //cid集合拿出来
-    val cids = categoryCountList.map(_.cid)
+    //cid集合拿出来 cid是long 但是传过来的是string
+    val cids = categoryCountList.map(_.cid.toLong)
     //将包含需求一的top10种类过滤出来
     val topCategoryActionRDD = userVisitActionRDD.filter(x => cids.contains(x.click_category_id))
+    //  topCategoryActionRDD.collect().foreach(print)
     //计算每个品类 下的每个session 的点击量  rdd ((cid, sid) ,1)
     val cidAndSessionRdd = topCategoryActionRDD.map({
       case action => ((action.click_category_id, action.session_id), 1)
     })
+    //cidAndSessionRdd.collect().foreach(print)
     val cidAndSessionCountRdd = cidAndSessionRdd
       .reduceByKey(_ + _)
       .map({
@@ -33,7 +35,7 @@ object CategorySessionTopApp {
     val cidAndSidCountGrouped = cidAndSessionCountRdd.groupByKey()
     //排序
     val result = cidAndSidCountGrouped.map({
-      case (cid, sidcountIt) => (cid, sidcountIt.toList.sortBy(-_._2))
+      case (cid, sidcountIt) => (cid, sidcountIt.toList.sortBy(-_._2).take(10))
     })
     result.collect.foreach(println)
   }
