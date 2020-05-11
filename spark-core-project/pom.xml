@@ -9,8 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>spark-core</artifactId>
-
+    <artifactId>spark-core-project</artifactId>
     <build>
         <plugins>
             <!-- 打包插件, 否则 scala 类不会编译并打包进去 -->
@@ -29,6 +28,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>
