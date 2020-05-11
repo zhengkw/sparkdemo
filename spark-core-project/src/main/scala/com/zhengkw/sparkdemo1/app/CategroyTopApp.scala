@@ -42,6 +42,7 @@ object CategroyTopApp {
     val result = categoryList
       .sortBy(x => (-x.clickCount, -x.orderCount, -x.payCount))
       .take(10)
-    result.foreach(println)
+    //result.foreach(println)
+     result
   }
 }

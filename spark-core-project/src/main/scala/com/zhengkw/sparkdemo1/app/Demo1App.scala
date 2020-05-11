@@ -46,7 +46,11 @@ object Demo1App {
         splits(12).toLong)
     })
     //计算Top10
-    CategroyTopApp.showTop10(sc, userVisitActionRDD)
+    //CategroyTopApp.showTop10(sc, userVisitActionRDD)
+    //需求1的返回值进行进一步计算
+    val categoryCountList = CategroyTopApp.showTop10(sc, userVisitActionRDD)
+    //  需求2的分析
+    CategorySessionTopApp.statCategoryTop10Session(sc, categoryCountList, userVisitActionRDD)
     sc.stop()
   }
 }
