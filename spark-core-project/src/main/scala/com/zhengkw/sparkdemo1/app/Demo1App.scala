@@ -50,7 +50,17 @@ object Demo1App {
     //需求1的返回值进行进一步计算
     val categoryCountList = CategroyTopApp.showTop10(sc, userVisitActionRDD)
     //  需求2的分析
-    CategorySessionTopApp.statCategoryTop10Session_1(sc, categoryCountList, userVisitActionRDD)
+  //  CategorySessionTopApp.statCategoryTop10Session_1(sc, categoryCountList, userVisitActionRDD)
+    //求需求3 漏斗分析，访问转换率
+    /**
+    * @descrption:
+     * @param pageStr=1,2,3,4,5,6,7 =>1->2,2->3,.....6->7
+     *               相同session 访问1的时间早于2的时间
+    * @return: void
+    * @date: 20/05/12 下午 1:56
+    * @author: zhengkw
+    */
+    statPageCoversionRate.showConversionRates(sc, userVisitActionRDD, "1,2,3,4,5,6,7")
     sc.stop()
   }
 }
