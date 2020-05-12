@@ -50,7 +50,7 @@ object Demo1App {
     //需求1的返回值进行进一步计算
     val categoryCountList = CategroyTopApp.showTop10(sc, userVisitActionRDD)
     //  需求2的分析
-    CategorySessionTopApp.statCategoryTop10Session(sc, categoryCountList, userVisitActionRDD)
+    CategorySessionTopApp.statCategoryTop10Session_1(sc, categoryCountList, userVisitActionRDD)
     sc.stop()
   }
 }
