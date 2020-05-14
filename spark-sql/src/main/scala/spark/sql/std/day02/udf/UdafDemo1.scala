@@ -1,8 +1,8 @@
 package spark.sql.std.day02.udf
 
-import org.apache.spark.sql.{Row, SparkSession}
 import org.apache.spark.sql.expressions.{MutableAggregationBuffer, UserDefinedAggregateFunction}
-import org.apache.spark.sql.types.{DataType, DoubleType, LongType, StructField, StructType}
+import org.apache.spark.sql.types.{DataType, LongType, StructField, StructType}
+import org.apache.spark.sql.{Row, SparkSession}
 
 /**
  * @ClassName:UdfDemo1
@@ -18,7 +18,6 @@ object UdafDemo1 {
       .master("local[2]")
       .appName("DSDemo1")
       .getOrCreate()
-    import spark.implicits._
     val df = spark.read.json("E:\\IdeaWorkspace\\sparkdemo\\data\\people.json")
     //注册udf函数
     spark.udf.register("mySum", new mySum)
