@@ -3,8 +3,7 @@ package com.zhengkw.exc.entity
 /**
  * @ClassName:UserVisitAction
  * @author: zhengkw
- * @description:
- * 用户访问动作表
+ *          用户访问动作表
  * @param date               用户点击行为的日期
  * @param user_id            用户的ID
  * @param session_id         Session的ID
@@ -18,7 +17,7 @@ package com.zhengkw.exc.entity
  * @param pay_category_ids   一次支付中所有品类的ID集合
  * @param pay_product_ids    一次支付中所有商品的ID集合
  * @param city_id            城市 id
- * @date: 20/05/11下午 10:09
+ * @date: 20/05/13下午 9:12
  * @version:1.0
  * @since: jdk 1.8 scala 2.11.8
  */
