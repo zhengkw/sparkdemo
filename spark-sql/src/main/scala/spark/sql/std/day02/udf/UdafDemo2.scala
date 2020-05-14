@@ -34,12 +34,17 @@ class myAvg extends UserDefinedAggregateFunction {
   override def inputSchema: StructType =
     StructType(StructField("ele", DoubleType) :: Nil)
 
+  /**
+   * @descrption: 求平均值需要一个数据的和  一个数据有效个数
+   * @return: org.apache.spark.sql.types.StructType
+   * @date: 20/05/14 下午 2:29
+   * @author: zhengkw
+   */
   override def bufferSchema: StructType =
     StructType(StructField("sum", DoubleType) :: StructField("count", LongType) :: Nil)
 
-  //返回值类型 最终聚合结果的类型
+  //返回值类型 最终聚合结果的类型 （返回一个格式化的数据 工具类返回的是string）
   override def dataType: DataType = StringType
-
 
   override def deterministic: Boolean = true
 
@@ -48,7 +53,12 @@ class myAvg extends UserDefinedAggregateFunction {
     buffer(1) = 0L
   }
 
-
+  /**
+  * @descrption: buffer(0)  -> sum  buffer(1) -> count
+  * @return: void
+  * @date: 20/05/14 下午 2:30
+  * @author: zhengkw
+  */
   override def update(buffer: MutableAggregationBuffer, input: Row): Unit = {
     if (!input.isNullAt(0)) {
       buffer(0) = buffer.getDouble(0) + input.getDouble(0)
