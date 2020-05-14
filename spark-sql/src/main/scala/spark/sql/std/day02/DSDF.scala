@@ -17,6 +17,7 @@ object DSDF {
       .appName("DSDF")
       .getOrCreate()
     import spark.implicits._
+   //read json读到的数字会转成Long
     val df = spark.read.json("E:\\IdeaWorkspace\\sparkdemo\\data\\people.json")
     val ds = df.as[People]
     ds.show()
