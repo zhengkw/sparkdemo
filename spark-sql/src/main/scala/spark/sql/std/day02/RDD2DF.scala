@@ -6,7 +6,7 @@ import org.apache.spark.sql.{Row, SparkSession}
 /**
  * @ClassName:RDD2DF
  * @author: zhengkw
- * @description:
+ * @description: spark.createDataFrame(rdd（row）, StructType)
  * @date: 20/05/14上午 10:48
  * @version:1.0
  * @since: jdk 1.8 scala 2.11.8
@@ -23,7 +23,7 @@ object RDD2DF {
       .map {
         case (age, name) => Row(age, name)
       }
-    val schema=StructType(Array(StructField("age",IntegerType),StructField("name",StringType)))
+    val schema = StructType(Array(StructField("age", IntegerType), StructField("name", StringType)))
     val df = spark.createDataFrame(rdd, schema)
     df.show()
 
