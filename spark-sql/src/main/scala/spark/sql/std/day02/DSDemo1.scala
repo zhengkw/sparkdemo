@@ -23,9 +23,8 @@ object DSDemo1 {
     ds.filter(_ > 30).show()
     ds.createOrReplaceTempView("demo")
     spark.sql("select * from demo where value >40").show()
-    val list1= User(21,"nokia")::User(18,"java")::User(20,"scala")::User(20,"nova")::Nil
+    val list1 = User(21, "nokia") :: User(18, "java") :: User(20, "scala") :: User(20, "nova") :: Nil
     list1.toDS().show()
   }
 }
 
-case class User(age: Int, name: String)
