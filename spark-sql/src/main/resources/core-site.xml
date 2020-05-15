@@ -35,7 +35,7 @@
 	<value>hadoop102:2181,hadoop103:2181,hadoop104:2181</value>
 </property>
 
-<property>
+<!--<property>
 <name>io.compression.codecs</name>
 <value>
 org.apache.hadoop.io.compress.GzipCodec,
@@ -49,7 +49,7 @@ com.hadoop.compression.lzo.LzopCodec
 <property>
     <name>io.compression.codec.lzo.class</name>
     <value>com.hadoop.compression.lzo.LzoCodec</value>
-</property>
+</property>-->
 
 <!-- 配置代理-->
 <property>
