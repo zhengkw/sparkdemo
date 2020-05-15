@@ -20,9 +20,9 @@ object ConnectHive {
       .enableHiveSupport()
       .getOrCreate()
     import spark.implicits._
-   // spark.sql("show databases")
-  //spark.sql("select * from gmall.dwt_uv_topic").show()
-    spark.sql("select * from gmall.ods_user_info").show()
+    // spark.sql("show databases")
+    //spark.sql("select * from gmall.dwt_uv_topic").show()
+    //spark.sql("select * from gmall.ods_user_info").show()
     spark.close()
   }
 }
