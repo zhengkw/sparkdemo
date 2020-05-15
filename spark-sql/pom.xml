@@ -11,6 +11,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>spark-sql</artifactId>
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-hive -->
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-hive_2.11</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+    </dependencies>
 
 
 </project>
