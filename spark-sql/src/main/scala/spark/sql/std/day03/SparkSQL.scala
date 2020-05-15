@@ -17,6 +17,7 @@ object SparkSQL {
     val spark = SparkSession.builder()
       .master("local[2]")
       .appName("SparkSQL")
+      .config("spark.sql.shuffle.partitions", 10)
       .enableHiveSupport()
       .getOrCreate()
     import spark.implicits._
