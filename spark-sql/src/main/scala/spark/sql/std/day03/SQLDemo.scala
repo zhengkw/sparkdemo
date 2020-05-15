@@ -151,6 +151,7 @@ class CityRemarkUDAF extends UserDefinedAggregateFunction {
       // 1. 先合并总数
       buffer1(1) = total1 + total2
       //聚合map
+      //没有把值给buffer（0）！！！ errror  TODO
       map1.foldLeft(map2)({
         case (map, (city, count)) =>
           // 聚合map
@@ -191,7 +192,7 @@ class CityRemarkUDAF extends UserDefinedAggregateFunction {
 }
 
 case class CityRemark(city: String, rate: Double) {
-  val f = new DecimalFormat(".00%")
+  val f = new DecimalFormat("#.##%")
 
   // 北京21.20%
   override def toString: String = s"$city:${f.format(math.abs(rate))}"
