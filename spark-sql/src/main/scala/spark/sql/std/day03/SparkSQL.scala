@@ -22,9 +22,12 @@ object SparkSQL {
       .getOrCreate()
     import spark.implicits._
     spark.sql("use spark")
-    // val df = spark.read.json("E:\\IdeaWorkspace\\sparkdemo\\data\\people.json")
-    val df = spark.read.json("/input/people.json")
-   // df.write.saveAsTable("people_")
+    // val df = spark.read.json("file:///E:\\IdeaWorkspace\\sparkdemo\\data\\people.json")
+    // val df = spark.read.json("/input/people.json")
+    // df.write.saveAsTable("people_")
+    //  val df = List((11L, "a"), (22L, "b")).toDF("n", "a")
+   val df = List(("adc", 11L), ("bbbc", 22L)).toDF("name", "age")
+    df.write.mode("append").saveAsTable("people")
     spark.sql("select * from people").show
 
   }
