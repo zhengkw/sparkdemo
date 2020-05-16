@@ -33,7 +33,7 @@ object RDDQueue {
       println(queue.size)
       val rdd = ssc.sparkContext.parallelize(1 to 100)
       queue.enqueue(rdd)
-      Thread.sleep(100)
+      Thread.sleep(2000)
     }
     ssc.awaitTermination()
   }
