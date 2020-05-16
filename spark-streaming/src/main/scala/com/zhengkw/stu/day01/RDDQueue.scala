@@ -22,9 +22,11 @@ object RDDQueue {
     val sc = ssc.sparkContext
     //创建一个队列
     val queue = mutable.Queue[RDD[Int]]()
-
+    //获取DS
     val rddDS = ssc.queueStream(queue, false)
+    //聚合DS
     val value = rddDS.reduce(_ + _)
+    //不传参数打印10条！
     value.print
     ssc.start()
 
@@ -33,7 +35,7 @@ object RDDQueue {
       println(queue.size)
       val rdd = ssc.sparkContext.parallelize(1 to 100)
       queue.enqueue(rdd)
-      Thread.sleep(2000)
+      // Thread.sleep(2000)
     }
     ssc.awaitTermination()
   }
