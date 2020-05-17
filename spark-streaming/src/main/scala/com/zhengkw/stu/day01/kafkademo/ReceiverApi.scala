@@ -7,7 +7,7 @@ import org.apache.spark.streaming.{Seconds, StreamingContext}
 /**
  * @ClassName:ReceiverApi
  * @author: zhengkw
- * @description:
+ * @description: 没有输出严格一次！
  * @date: 20/05/17下午 9:14
  * @version:1.0
  * @since: jdk 1.8 scala 2.11.8
