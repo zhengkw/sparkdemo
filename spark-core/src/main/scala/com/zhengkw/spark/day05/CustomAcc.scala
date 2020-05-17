@@ -1,5 +1,6 @@
 package com.zhengkw.spark.day05
 
+import com.sun.xml.bind.v2.TODO
 import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.rdd.RDD
 import org.apache.spark.util.AccumulatorV2
@@ -31,6 +32,7 @@ class MyAcc extends AccumulatorV2 {
   //复制累加器，将来用于序列化的时候告诉别人如何复制累加器！
   //有个分区算错了，那么就将这个计算计划给另一个分区，这个时候也会将累加器复制过去！
   //如果算了一部分了，那么要返回这个算好的计算结果
+  //TODO
   override def copy(): AccumulatorV2[Nothing, Nothing] = ???
 
   //重置累加器
