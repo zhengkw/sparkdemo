@@ -6,7 +6,7 @@ import org.apache.spark.rdd.RDD
 /**
  * @ClassName:Simple
  * @author: zhengkw
- * @description:
+ * @description: 抽样
  * @date: 20/05/06上午 12:39
  * @version:1.0
  * @since: jdk 1.8 scala 2.11.8
