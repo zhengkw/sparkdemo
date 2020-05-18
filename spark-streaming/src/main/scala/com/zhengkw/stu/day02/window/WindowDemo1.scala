@@ -20,7 +20,7 @@ object WindowDemo1 {
     stream
       .flatMap(_.split(" "))
       .map((_, 1))
-      .reduceByKeyAndWindow(_ + _, invReduceFunc = (now, pre) => now - pre, windowDuration = Seconds(9), slideDuration = Seconds(3))
+      .reduceByKeyAndWindow(_ + _, invReduceFunc = (now, pre) => now - pre, windowDuration = Seconds(9), slideDuration = Seconds(3), filterFunc = (_._2 > 0))
       .print(100)
     ssc.start()
     ssc.awaitTermination()
