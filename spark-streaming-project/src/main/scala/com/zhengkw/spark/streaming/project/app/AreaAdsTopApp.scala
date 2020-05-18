@@ -21,6 +21,7 @@ object AreaAdsTopApp {
       .getKafkaStream(ssc, "ads_log")
       .map(log => {
         val splits: Array[String] = log.split(",")
+        // 1589787737517,华南,深圳,104,4
         AdsInfo(splits(0).toLong, splits(1), splits(2), splits(3), splits(4))
       })
 

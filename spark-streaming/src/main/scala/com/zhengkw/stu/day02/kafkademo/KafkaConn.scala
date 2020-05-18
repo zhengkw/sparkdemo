@@ -1,7 +1,9 @@
 package com.zhengkw.stu.day02.kafkademo
 
+import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.apache.kafka.common.serialization.StringDeserializer
 import org.apache.spark.SparkConf
+import org.apache.spark.streaming.dstream.InputDStream
 import org.apache.spark.streaming.kafka010.ConsumerStrategies.Subscribe
 import org.apache.spark.streaming.kafka010.{ConsumerStrategy, KafkaUtils, LocationStrategies, LocationStrategy, PerPartitionConfig}
 import org.apache.spark.streaming.{Seconds, StreamingContext}
@@ -27,7 +29,7 @@ object KafkaConn {
       "auto.offset.reset" -> "latest", // 每次从最新的位置开始读
       "enable.auto.commit" -> (true: java.lang.Boolean) // 自动提交kafka的offset
     )
-    val ds = KafkaUtils.createDirectStream[String, String](
+    val ds: InputDStream[ConsumerRecord[String, String]] = KafkaUtils.createDirectStream[String, String](
       ssc: StreamingContext,
       locationStrategy = LocationStrategies.PreferConsistent, //平均分配
       Subscribe[String, String](topics, kafkaParams)
