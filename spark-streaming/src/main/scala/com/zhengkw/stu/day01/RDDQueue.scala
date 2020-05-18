@@ -2,6 +2,7 @@ package com.zhengkw.stu.day01
 
 import org.apache.spark.SparkConf
 import org.apache.spark.rdd.RDD
+import org.apache.spark.streaming.dstream.DStream
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 
 import scala.collection.mutable
@@ -9,7 +10,7 @@ import scala.collection.mutable
 /**
  * @ClassName:RDDQueue
  * @author: zhengkw
- * @description:
+ * @description: rdd队列得到DS
  * @date: 20/05/16上午 11:36
  * @version:1.0
  * @since: jdk 1.8 scala 2.11.8
@@ -23,9 +24,9 @@ object RDDQueue {
     //创建一个队列
     val queue = mutable.Queue[RDD[Int]]()
     //获取DS
-    val rddDS = ssc.queueStream(queue, false)
+    val stream = ssc.queueStream(queue, false)
     //聚合DS
-    val value = rddDS.reduce(_ + _)
+    val value: DStream[Int] = stream.reduce(_ + _)
     //不传参数打印10条！
     value.print
     ssc.start()

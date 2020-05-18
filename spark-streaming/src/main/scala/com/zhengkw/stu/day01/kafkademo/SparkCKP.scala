@@ -22,38 +22,38 @@ object SparkCKP {
     val ssc: StreamingContext = new StreamingContext(conf, Seconds(3))
     //必须声明！
     ssc.checkpoint("./ck1") // 对ssc做checkpoint.
-    //非直连模式通过实现WAL来避免丢失数据，或者用ckp！下面的是ckp来保证输出严格一次！
-    val rids: ReceiverInputDStream[(String, String)] = KafkaUtils.createStream(
-      ssc,
-      "hadoop102:2181,hadoop103:2181,hadoop104:2181/mykafka",
-      "zhengkw",
-      Map("sparktest" -> 2)
-    )
-    rids
-      .map(_._2)
-      .flatMap(_.split(" "))
-      .map((_, 1))
-      .reduceByKey(_ + _)
-      .print
-    ssc
-    /*
-    //直连利用ckp
-    val param = Map[String, String](
-       "bootstrap.servers" -> "hadoop102:9092,hadoop103:9092,hadoop104:9092",
-       "group.id" -> "zhengkw"
-     )
-     val stream = KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder](
+    /* //非直连模式通过实现WAL来避免丢失数据，或者用ckp！下面的是ckp来保证输出严格一次！
+     val rids: ReceiverInputDStream[(String, String)] = KafkaUtils.createStream(
        ssc,
-       param,
-       Set("sparktest"))
-     stream
+       "hadoop102:2181,hadoop103:2181,hadoop104:2181/mykafka",
+       "zhengkw",
+       Map("sparktest" -> 2)
+     )
+     rids
        .map(_._2)
        .flatMap(_.split(" "))
        .map((_, 1))
        .reduceByKey(_ + _)
        .print
-
      ssc*/
+
+    //直连利用ckp
+    val param = Map[String, String](
+      "bootstrap.servers" -> "hadoop102:9092,hadoop103:9092,hadoop104:9092",
+      "group.id" -> "zhengkw"
+    )
+    val stream = KafkaUtils.createDirectStream[String, String, StringDecoder, StringDecoder](
+      ssc,
+      param,
+      Set("sparktest"))
+    stream
+      .map(_._2)
+      .flatMap(_.split(" "))
+      .map((_, 1))
+      .reduceByKey(_ + _)
+      .print
+
+    ssc
   }
 
   def main(args: Array[String]): Unit = {
