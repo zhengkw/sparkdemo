@@ -13,9 +13,16 @@ import org.apache.spark.streaming.{Seconds, StreamingContext}
  */
 object WindowDemo {
   def main(args: Array[String]): Unit = {
-    val conf = new SparkConf().setMaster("local[*]").setAppName("TransformDemo")
+    val conf = new SparkConf().setMaster("local[*]").setAppName("WindowDemo")
     val ssc = new StreamingContext(conf, Seconds(3))
+    ssc.checkpoint("./ck2")
     val stream = ssc.socketTextStream("hadoop102", 9876)
-    stream.flatMap()
+    stream
+      .flatMap(_.split(" "))
+      .map((_, 1))
+      .reduceByKeyAndWindow(_ + _, Seconds(9))
+      .print(100)
+    ssc.start()
+    ssc.awaitTermination()
   }
 }
