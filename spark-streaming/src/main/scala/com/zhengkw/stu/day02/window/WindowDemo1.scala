@@ -4,14 +4,14 @@ import org.apache.spark.SparkConf
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 
 /**
- * @ClassName:WindowDemo
+ * @ClassName:WindowDemo1
  * @author: zhengkw
- * @description:  window 9s  slide 3s
- * @date: 20/05/18上午 11:53
+ * @description: invReduceFun 参数使用
+ * @date: 20/05/18下午 12:04
  * @version:1.0
  * @since: jdk 1.8 scala 2.11.8
  */
-object WindowDemo {
+object WindowDemo1 {
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setMaster("local[*]").setAppName("WindowDemo")
     val ssc = new StreamingContext(conf, Seconds(3))
@@ -20,7 +20,7 @@ object WindowDemo {
     stream
       .flatMap(_.split(" "))
       .map((_, 1))
-      .reduceByKeyAndWindow(_ + _, Seconds(9), slideDuration = Seconds(3))
+      .reduceByKeyAndWindow(_ + _, invReduceFunc = (now, pre) => now - pre, windowDuration = Seconds(9), slideDuration = Seconds(3))
       .print(100)
     ssc.start()
     ssc.awaitTermination()
