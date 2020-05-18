@@ -1,3 +1,4 @@
+/*
 package com.zhengkw.stu.day01.kafkademo
 
 import org.apache.spark.SparkConf
@@ -32,3 +33,4 @@ object ReceiverApi {
     ssc.awaitTermination()
   }
 }
+*/

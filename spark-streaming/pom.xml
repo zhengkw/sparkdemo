@@ -20,9 +20,15 @@
             <!-- <scope>provided</scope>-->
         </dependency>
 
+        <!-- <dependency> day01 kafka相关代码注释掉
+             <groupId>org.apache.spark</groupId>
+             <artifactId>spark-streaming-kafka-0-8_2.11</artifactId>
+             <version>2.1.1</version>
+         </dependency>-->
+        <!--0-10_2.11  kafka_scala版本号-->
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-streaming-kafka-0-8_2.11</artifactId>
+            <artifactId>spark-streaming-kafka-0-10_2.11</artifactId>
             <version>2.1.1</version>
         </dependency>
     </dependencies>

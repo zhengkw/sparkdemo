@@ -1,3 +1,4 @@
+/*
 package com.zhengkw.stu.day01.kafkademo
 
 import kafka.serializer.StringDecoder
@@ -62,3 +63,4 @@ object SparkCKP {
     ssc.awaitTermination()
   }
 }
+*/
