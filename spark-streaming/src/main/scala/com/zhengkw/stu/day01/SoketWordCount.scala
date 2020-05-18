@@ -1,5 +1,6 @@
 package com.zhengkw.stu.day01
 
+import org.apache.spark.streaming.dstream.{DStream, ReceiverInputDStream}
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 import org.apache.spark.{SparkConf, SparkContext}
 
@@ -13,13 +14,13 @@ import org.apache.spark.{SparkConf, SparkContext}
  */
 object SoketWordCount {
   def main(args: Array[String]): Unit = {
-    val conf = new SparkConf().setAppName("SoketWordCount").setMaster("local[2]")
+    val conf: SparkConf = new SparkConf().setAppName("SoketWordCount").setMaster("local[2]")
     //获取上下文
-    val ssc = new StreamingContext(conf, Seconds(3))
+    val ssc: StreamingContext = new StreamingContext(conf, Seconds(3))
 
-    val sourceStream = ssc.socketTextStream("hadoop102", 9999)
+    val sourceStream: ReceiverInputDStream[String] = ssc.socketTextStream("hadoop102", 9999)
     // 2. 从数据源读取数据, 得到 DStream  (RDD, DataSet, DataFrame)
-    val resultStream = sourceStream.flatMap(_.split(" ")).map((_, 1)).reduceByKey(_ + _)
+    val resultStream: DStream[(String, Int)] = sourceStream.flatMap(_.split(" ")).map((_, 1)).reduceByKey(_ + _)
     //打印前N个
     resultStream.print(100)
     // 4. 启动流

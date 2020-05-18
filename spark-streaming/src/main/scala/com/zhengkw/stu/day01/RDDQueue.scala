@@ -2,7 +2,7 @@ package com.zhengkw.stu.day01
 
 import org.apache.spark.SparkConf
 import org.apache.spark.rdd.RDD
-import org.apache.spark.streaming.dstream.DStream
+import org.apache.spark.streaming.dstream.{DStream, InputDStream}
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 
 import scala.collection.mutable
@@ -17,14 +17,12 @@ import scala.collection.mutable
  */
 object RDDQueue {
   def main(args: Array[String]): Unit = {
-    val conf = new SparkConf().setMaster("local[2]").setAppName("RDDQueue")
-    val ssc = new StreamingContext(conf, Seconds(3))
-    //获取sc
-    val sc = ssc.sparkContext
+    val conf: SparkConf = new SparkConf().setMaster("local[2]").setAppName("RDDQueue")
+    val ssc: StreamingContext = new StreamingContext(conf, Seconds(3))
     //创建一个队列
-    val queue = mutable.Queue[RDD[Int]]()
+    val queue: mutable.Queue[RDD[Int]] = mutable.Queue[RDD[Int]]()
     //获取DS
-    val stream = ssc.queueStream(queue, false)
+    val stream: InputDStream[Int] = ssc.queueStream(queue, false)
     //聚合DS
     val value: DStream[Int] = stream.reduce(_ + _)
     //不传参数打印10条！
