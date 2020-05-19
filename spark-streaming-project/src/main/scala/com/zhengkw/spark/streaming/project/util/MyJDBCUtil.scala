@@ -22,4 +22,8 @@ object MyJDBCUtil {
     if (conn != null) conn
     else DriverManager.getConnection(url, user, pw)
   }
+
+  def closeConn() = {
+    if (conn != null) conn.close()
+  }
 }
