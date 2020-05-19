@@ -16,8 +16,8 @@ object MyKafkaUtil {
   val params = Map[String, String](
     "bootstrap.servers" -> "hadoop102:9092,hadoop103:9092,hadoop104:9092",
     "group.id" -> "zhengkw",
-    // "auto.offset.reset" -> "smallest", // 每次从最早的位置开始读
-    "auto.offset.reset" -> "largest", // 每次从最新的位置开始读
+    "auto.offset.reset" -> "smallest", // 每次从最早的位置开始读
+   // "auto.offset.reset" -> "largest", // 每次从最新的位置开始读
     "enable.auto.commit" -> "true" // 自动提交kafka的offset
   )
 
