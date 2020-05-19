@@ -64,7 +64,7 @@ object MockRealTime {
       mockRealTimeData().foreach {
         msg => {
           // 发送到kafka
-          println(msg)
+          println(topic + "\t" + msg)
           producer.send(new ProducerRecord(topic, msg))
           Thread.sleep(100)
         }
