@@ -1,4 +1,5 @@
 package com.zhengkw.realtime.app
+
 import java.util.Properties
 import com.zhengkw.realtime.bean.CityInfo
 import com.zhengkw.realtime.util.{RandomNumUtil, RandomOptions}
@@ -62,6 +63,8 @@ object MockRealTime {
     while (true) {
       mockRealTimeData().foreach {
         msg => {
+          // 发送到kafka
+          println(msg)
           producer.send(new ProducerRecord(topic, msg))
           Thread.sleep(100)
         }

@@ -3,6 +3,7 @@ package com.zhengkw.spark.streaming.project.app
 import com.zhengkw.spark.streaming.project.bean.AdsInfo
 import com.zhengkw.spark.streaming.project.util.MyKafkaUtil
 import org.apache.spark.SparkConf
+import org.apache.spark.streaming.dstream.DStream
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 
 
@@ -17,7 +18,7 @@ object AreaAdsTopApp {
     val ssc = new StreamingContext(conf, Seconds(3))
     ssc.checkpoint("./ck1")
 
-    val adsInfoStream = MyKafkaUtil
+    val adsInfoStream: DStream[AdsInfo] = MyKafkaUtil
       .getKafkaStream(ssc, "ads_log")
       .map(log => {
         val splits: Array[String] = log.split(",")
