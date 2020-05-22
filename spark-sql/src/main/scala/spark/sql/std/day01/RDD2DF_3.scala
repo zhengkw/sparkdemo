@@ -23,6 +23,6 @@ object RDD2DF_3 {
     val df = map.toList.toDF("x", "y")
     df.show()
     df.printSchema()
-
+    spark.close()
   }
 }
