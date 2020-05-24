@@ -1,5 +1,6 @@
 # Project exclude paths
 .idea
+target/
 /spark-core/target/
 ck1/
 ck2/
