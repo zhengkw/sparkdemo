@@ -4,3 +4,12 @@ target/
 /spark-core/target/
 ck1/
 ck2/
+mockdata/src/test/
+spark-core-project/src/test/
+spark-core/src/main/java/
+spark-core/src/test/
+spark-sql/src/test/
+spark-streaming-project/src/test/
+spark-streaming/src/test/
+spark-warehouse/
+src/
